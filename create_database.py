@@ -1,2 +1,2 @@
-from flask_server import db
+from crud import db
 db.create_all()
