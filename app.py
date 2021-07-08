@@ -29,9 +29,18 @@ def get_customers(id):
     pass
 
 # Add
-@app.route('/customer/add', methods=['POST'])
+@app.route('/customer', methods=['POST'])
 def add_customer():
-    pass
+    form = request.form.to_dict(flat=False)
+    name = form['name'][0]
+    email = form['email'][0]
+    address = form['address'][0]
+
+    new_customer = Customer(name=name, email=email, address=address)
+    db.session.add(new_customer)   
+    db.session.commit()
+    customer_data = Customer.query.all()
+    return render_template('index.html', data=customer_data)
 
 # Update
 
@@ -40,7 +49,9 @@ def add_customer():
 
 @app.route('/', methods=['GET'])
 def index_html():
-    return render_template('index.html')
+    customer_data = Customer.query.all()
+    return render_template('index.html', data=customer_data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

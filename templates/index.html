@@ -8,5 +8,34 @@
 </head>
 <body>
     <h1>Welcome to the Machine</h1>
+
+    <form action="customer" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br><br>
+        <label for="email">Address:</label>
+        <input type="text" id="address" name="address"><br><br>        
+        <input type="submit" value="Add Customer">
+      </form>
+
+      <h2>Database Listing.....</h2>
+      <table style="width:80%;">
+          <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>email</th>
+            <th>address</th>
+          </tr>
+          {% for row in data %}
+          <tr>
+            <td><a href="customer/{{ row.id }}"> {{ row.id  }} </a></td>
+            <td>{{ row.name }}</td>
+            <td>{{ row.email }}</td>
+            <td>{{ row.address }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      
 </body>
 </html>
